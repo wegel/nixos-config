@@ -35,6 +35,7 @@
         ls = "eza -gl --git --color=auto --icons=auto";
         tree = "eza --tree";
         cat = "bat -P --style=plain";
+        lz = "lazygit";
 
         ip = "ip --color";
         ipb = "ip --color --brief";
@@ -45,7 +46,6 @@
         htop = "btm -b";
 
         open = "xdg-open";
-        k = "kubectl";
 
         cleanup-nix = "sudo nix-collect-garbage -d";
         rln = "sudo nixos-rebuild switch --flake /home/wegel/nixos-config";

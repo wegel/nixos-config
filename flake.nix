@@ -5,6 +5,10 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    firefox-addons = { url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons"; inputs.nixpkgs.follows = "nixpkgs"; };
+
+    #nurpkgs.url = github:nix-community/NUR;
+
     home-manager.url = "github:nix-community/home-manager/release-23.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -19,6 +23,8 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
+    inherit inputs;
+
     systemConfig = {
       hostname = "gamma";
       username = "wegel";
@@ -28,14 +34,13 @@
       arch = "x86_64-linux";
       timezone = "America/Toronto";
       locale = "en_CA.UTF-8";
-      shell = nixpkgs.zsh;
+      shell = inputs.nixpkgs.legacyPackages."x86_64-linux".zsh;
     };
   in {
 
     overlays = import ./overlays {inherit inputs;};
 
-    # NixOS configuration entrypoint
-    # Available through 'nixos-rebuild --flake .#your-hostname'
+    # NixOS configuration entrypoint: 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
       "workstation" = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs systemConfig;};
@@ -44,8 +49,7 @@
       };
     };
 
-    # Standalone home-manager configuration entrypoint
-    # Available through 'home-manager --flake .#your-username@your-hostname'
+    # Standalone home-manager configuration entrypoint: 'home-manager --flake .#your-username@your-hostname'
     homeConfigurations = {
       "workstation" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages."${systemConfig.arch}"; # Home-manager requires 'pkgs' instance

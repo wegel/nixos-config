@@ -61,6 +61,8 @@
 
   boot.loader.systemd-boot.enable = true;
 
+  programs.zsh.enable = true;
+  
   users.users = {
     "${systemConfig.username}" = {
       # TODO: You can set an initial password for your user.

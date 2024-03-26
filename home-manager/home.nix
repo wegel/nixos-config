@@ -11,7 +11,9 @@
   imports = [
     inputs.nix-colors.homeManagerModule
 
+    ./starship.nix
     ./zsh.nix
+    ./firefox.nix
     ./rice.nix
     ./desktop.nix
     ./user-packages.nix
