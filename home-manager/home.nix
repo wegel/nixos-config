@@ -11,6 +11,7 @@
   imports = [
     inputs.nix-colors.homeManagerModule
 
+    ./zsh.nix
     ./rice.nix
     ./desktop.nix
     ./user-packages.nix
@@ -48,6 +49,8 @@
       push = { autoSetupRemote = true; };
     };
   };
+
+  programs.zsh.enable = true;
 
 
   # Nicely reload system units when changing configs

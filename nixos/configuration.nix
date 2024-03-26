@@ -59,10 +59,8 @@
   networking.networkmanager.enable = true;
   networking.networkmanager.wifi.backend = "iwd";
 
-  # TODO: This is just an example, be sure to use whatever bootloader you prefer
   boot.loader.systemd-boot.enable = true;
 
-  # TODO: Configure your system-wide user settings (groups, etc), add more users as needed.
   users.users = {
     "${systemConfig.username}" = {
       # TODO: You can set an initial password for your user.
@@ -70,6 +68,7 @@
       # Be sure to change it (using passwd) after rebooting!
       initialPassword = "correcthorsebatterystaple";
       isNormalUser = true;
+      shell = systemConfig.shell;
       openssh.authorizedKeys.keys = systemConfig.publicKeys;
       extraGroups = systemConfig.groups;
     };
