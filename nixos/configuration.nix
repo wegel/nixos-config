@@ -57,6 +57,7 @@
 
   networking.hostName = "${systemConfig.hostname}";
   networking.networkmanager.enable = true;
+  networking.networkmanager.wifi.backend = "iwd";
 
   # TODO: This is just an example, be sure to use whatever bootloader you prefer
   boot.loader.systemd-boot.enable = true;
